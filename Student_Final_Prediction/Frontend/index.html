@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Final Prediction</h1>
+
+        <div class="card input-box">
+            <h2>Enter Student</h2>
+            <form id="prediction-form">
+                <div class="input-group">
+                    <label for="Name">Name:</label>
+                    <input type="text" id="Name" name="Name" value="" required>
+                </div>
+                <div class="input-group">
+                    <label for="Course">Course:</label>
+                    <input type="text" id="Course" name="Course" value="" required>
+                </div>
+                <div class="input-group">
+                    <label for="Age">Age:</label>
+                    <input type="number" id="Age" name="Age" min="15" max="30" value="" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="Gender">Gender:</label>
+                    <select id="Gender" name="Gender"  required>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="Attendance">Attendance Score (0-5)</label>
+                    <input type="number" id="Attendance" name="Attendance" min="0" max="5" value="" required>
+                </div>
+                <div class="input-group">
+                    <label for="Assignments">Assignments Score (0-10)</label>
+                    <input type="number" id="Assignments" name="Assignments" min="0" max="10" value="" required>
+                </div>
+                <div class="input-group">
+                    <label for="Quiz">Quiz Score (0-5)</label> <input type="number" id="Quiz" name="Quiz" min="0" max="5" value="" required>
+                </div>
+                <div class="input-group">
+                    <label for="Midterm">Midterm Score (0-20)</label>
+                    <input type="number" id="Midterm" name="Midterm" min="0" max="20" value="" required>
+                </div>
+                
+                <div class="model-select">
+                    <label for="model-choice">Dooro Modelka Saadaalinta:</label>
+                    <select id="model-choice" name="model-choice">
+                        <option value="xgb">XGBoost (Default)</option>
+                        <option value="rf">Random Forest</option>
+                        <option value="lr">Logistic Regression</option>
+                        <option value="dt">Decision Tree</option>
+                    </select>
+                </div>
+                
+                <button type="submit" id="predict-button">Predict Final Score</button>
+            </form>
+            
+            </div>
+
+        <div class="card result-box">
+            <h2>Result</h2>
+            <div id="result-message" class="waiting">
+                <p>Enter the scores, we predicting whether will Pass or Fail before the Final</p>
+            </div>
+            <div id="score-details" style="display: none;">
+                <p><strong>Name:</strong> <span id="student-name">-</span></p>
+                <p><strong>Course:</strong> <span id="course-name">-</span></p>
+                <p><strong>Total Percentage:</strong> <span id="total-score-percentage">-</span></p> 
+                <p><strong>Model Used:</strong> <span id="model-used">-</span></p>
+            </div>
+            <div id="excel-result-message" style="margin-top: 20px;"></div> 
+
+             <hr style="margin: 30px 0; border: 0; border-top: 1px solid #ccc;">
+
+            <h2>Upload Excel for Batch Prediction</h2>
+            <form id="excel-form">
+                <div class="input-group">
+                    <label for="excel-file">Import Excel file  .xlsx</label>
+                    <input type="file" id="excel-file" name="excel-file" accept=".xlsx" required>
+                </div>
+                <button type="submit" id="excel-predict-button" style="background-color: #007bff;">Download Fail List</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
