@@ -4,19 +4,17 @@
 
  **student final prediction** = hadafka wa in la sii sadaalin karo final ka ardeyga si maamulayaasha ardeyda liita muraajico u sameyan kuwa top ku jira la abaal mariyo, kuwa dhexe na la dhiiri galiyo, wana in xog cusub aqbali karaa, project gu waana Supervised qeybta Classfication.
 
-## 2: Data collection
+### 2: Data collection
 
 Dataset ku waa 1k+ ardey ah, 9 columns 8 ka mid ah waa **feutures** 1 waa **label**
 
-## 3: Data preprocessing
+### 3: Data preprocessing
 
 waxan ka saaray khaladaadka, meelaha banan oo aan buuxiyey, duplicate, iqr_function, feauture engineering, One Hot Encoding, save the scaler and training features, saved dataset
 
-### 4: Exploratory Data Analysis (EDA)
+### 4: check images
+[click it](Student_Final_Prediction/images)
 
-* Distribution arag (histogram, boxplot).
-* Correlation ka fiiri (heatmap) si aad u ogaato features-ka ugu saameynta badan.
-* Outliers ogow oo go’aan ka gaar (in la saxo mise la dhaafo).
 
 ### 5: Model selection
 
