@@ -92,11 +92,11 @@ waxan ku toobaray **Linear Regression** and **Random Forest** models kadibna wax
 
 ###### Linear Regression(lr)
 
-![alt text](./House_Rent_Prediction/images/Lr_house_rent.png)
+![alt text](./frontend/imageshouse/Lr_house_rent.png)
 
 ###### Random Forest(rf)
 
-![alt text](./House_Rent_Prediction/images/RF_house_rent.png)
+![alt text](./frontend/imageshouse/RF_house_rent.png)
 
 ## - 📊 Dataset
 
