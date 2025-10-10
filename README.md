@@ -76,15 +76,11 @@ weliba sida ay u qoran yihiin, **lakiin wax kale waad kuso darsan karta sida  na
 
 * totalku waa 40          maadama u finalka yahay 60
 
-
-
 ---
-
 
 # 🏠 House Rent Prediction
 
 *Welcome! Machine Learning Project to Predict House Prices*
-
 
 ## 📖 Description
 
@@ -94,11 +90,11 @@ waxan ku toobaray **Linear Regression** and **Random Forest** models kadibna wax
 
 ##### tijabo:
 
-###### Linear Regression
+###### Linear Regression(lr)
 
 ![alt text](./House_Rent_Prediction/images/Lr_house_rent.png)
 
-###### Random Forest
+###### Random Forest(rf)
 
 ![alt text](./House_Rent_Prediction/images/RF_house_rent.png)
 
