@@ -270,7 +270,7 @@ img {
 #pricing .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    gap: 40px;
     margin: 80px 20px;
 }
 
