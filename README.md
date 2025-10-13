@@ -45,6 +45,10 @@ waxan ka saaray khaladaadka, meelaha banan oo aan buuxiyey, duplicate, iqr_funct
   * Classification → Accuracy, Precision, Recall, F1-score
 * saved models
 
+![alt text](./Student_Final_Prediction/images/models.jpg)
+
+---
+
 ### 7: Deployment & usage
 
 * API (Flask) si xog cusub loo galiyo loona helo prediction
@@ -68,7 +72,7 @@ weliba sida ay u qoran yihiin, **lakiin wax kale waad kuso darsan karta sida  na
 
 **kadibna soo download gareyso list kaliya ah fail examka dhici raba finalka si aad uga hortagto oo aad murajico ugu sameyso**
 
-### 10: 💡scores/ dhibcaha
+### 11: 💡scores/ dhibcaha
 
 1: Attendance = 0 ilaa 5                 2: Assignments = 0 ilaa 10
 
@@ -77,6 +81,73 @@ weliba sida ay u qoran yihiin, **lakiin wax kale waad kuso darsan karta sida  na
 * totalku waa 40          maadama u finalka yahay 60
 
 ---
+
+## 12: 🤖 Models
+
+waxan ku toobaray:
+
+- **logistic Regression**
+- **Random Forest**
+- **decition tree**
+- **XGBoost**
+
+**Saved models:**
+
+- `modeles/lr_model.joblib`
+- `modeles/rf_model.joblib`
+- `modeles/ds_model.joblib`
+- `modeles/rf_model.joblib`
+
+---
+
+### 13: Working API deployment
+
+![alt text](./Student_Final_Prediction/images/WhatsApp%20Image%202025-10-10%20at%2020.19.25_aad444c7.jpg)
+
+
+---
+
+## 14: 🚀 Usage
+
+### Run via API
+
+Start Flask API:
+
+###### Send POST request
+
+http://localhost:8000/predict?model=lr
+http://localhost:8000/predict?model=rf
+http://localhost:8000/predict?model=df
+http://localhost:8000/predict?model=xgb
+
+---
+
+###### Example JSON input:
+
+{
+  "Attendance": 4
+  "Assignments": 8  
+  "Quiz": 5
+  "Midterm": 12
+}
+
+###### Example response:
+
+{
+  "model": "logistic regression",
+  "Total_score": 29,
+  "prediction_result": fail
+}
+
+{
+  "model": "XGBoost",
+  "Total_score": 29,
+  "prediction_result": pass
+}
+
+
+---
+
 
 # 🏠 House Rent Prediction
 

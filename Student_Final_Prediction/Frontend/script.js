@@ -1,17 +1,17 @@
-// Hubi in API-gaagu ku shaqaynayo http://127.0.0.1:8000 ama isbeddel ku samee URL-kan
+// API-link
 const BASE_URL = 'http://127.0.0.1:8000';
-const MAX_TOTAL_SCORE = 40; // 5 (Attendance) + 10 (Assignments) + 10 (Quiz) + 20 (Midterm) = 45. 
 
-// Waxaan isticmaalayaa 45 dhibcaha ugu badan: 5+10+10+20 = 45 (waxaan u maleeyay inaad Quiz max 10 ka dhigtay form-ka)
+// Waxaan isticmaalayaa 40 dhibcaha ugu badan: 5+10+10+20 = 45
+const MAX_TOTAL_SCORE = 40;
 const MAX_SCORE = 40;
 
 
-// --- Function for Single Student Prediction ---
+// --- Function Single Student Prediction ---
 document.getElementById('prediction-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const form = event.target;
-    // Model Choice waxaan ka soo qaadanayaa Select-ka (id="model-choice") ee form-ka hore ku jira
+    //waxaan ka soo qaadanayaa Select-ka (id="model-choice")
     const modelChoice = document.getElementById('model-choice').value; 
     const resultMessage = document.getElementById('result-message');
     const scoreDetails = document.getElementById('score-details');
@@ -22,21 +22,20 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
     const courseName = form['Course'].value;
 
     const data = {
-        // Halkan waxaan ka saarayaa "Age" iyo "Gender" maxaa yeelay API-gaaga wuxuu sheegay inuu u baahan yahay oo kaliya
-        // "Attendance", "Assignments", "Quiz", "Midterm"
+        // "Attendance", "Assignments", "Quiz", "Midterm" API-ga  baahan yahay oo kaliya
         Attendance: parseFloat(form['Attendance'].value),
         Assignments: parseFloat(form['Assignments'].value),
         Quiz: parseFloat(form['Quiz'].value),
         Midterm: parseFloat(form['Midterm'].value)
     };
 
-    // U diyaari UI in la sugo
+    // UI in la sugo
     resultMessage.className = 'waiting';
     resultMessage.innerHTML = '<p>Xisaabinta Natiijada...</p>';
     scoreDetails.style.display = 'none';
     predictButton.disabled = true;
 
-    // Samee API Request (FETCH)
+    // API Request
     fetch(`${BASE_URL}/predict?model=${modelChoice}`, {
         method: 'POST',
         headers: {
@@ -47,7 +46,7 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
     .then(response => {
         if (!response.ok) {
             return response.json().then(err => {
-                throw new Error(err.error || 'Server-ka wax baa ka qaldamay.');
+                throw new Error(err.error || 'Error the Server.');
             });
         }
         return response.json();
@@ -57,18 +56,19 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
         const totalScore = result.Total_Score_Calculated;
         const modelUsed = result.model;
 
-        // Xisaabinta Percentage-ka
+        // Percentage
         const percentage = ((totalScore / MAX_SCORE) * 100).toFixed(2); // Ku wareeji 2 decimal
         
         
-        // Visual Feedback (Midabka)
+        // Feedback
         resultMessage.className = (prediction === 'Pass') ? 'pass' : 'fail';
         resultMessage.innerHTML = `<p>You will:  ${prediction}</p>`;
         
-        // Soo bandhig Faahfaahinta Dhibcaha oo ay ku jiraan percentage-ka
+        // Faahfaahinta Dhibcaha
         document.getElementById('student-name').textContent = studentName;
         document.getElementById('course-name').textContent = courseName;  
-        document.getElementById('total-score-percentage').textContent = `${percentage}% (${totalScore} / ${MAX_SCORE})`; // Ku dar Total Score as well
+        document.getElementById('total-score-percentage').textContent = `${percentage}% (${totalScore} / ${MAX_SCORE})`; 
+        // Total Score
         document.getElementById('model-used').textContent = modelUsed;
         scoreDetails.style.display = 'block';
 
@@ -85,7 +85,7 @@ document.getElementById('prediction-form').addEventListener('submit', function(e
 });
 
 
-// --- Function for Excel File Upload and Prediction (QAYBTA CUSUB) ---
+// --- Function Excel File Upload and Prediction ---
 document.getElementById('excel-form').addEventListener('submit', function(event) {
     event.preventDefault();
     
@@ -117,11 +117,11 @@ document.getElementById('excel-form').addEventListener('submit', function(event)
         if (response.headers.get('content-type') === 'application/json') {
              // Haddii uu server-ku khalad soo celiyo oo uu JSON yahay
             return response.json().then(err => {
-                throw new Error(err.error || 'Server-ka wax baa ka qaldamay xisaabinta file-ka.');
+                throw new Error(err.error || 'Error Server to calculate in this file.');
             });
         }
         if (!response.ok) {
-            throw new Error('Codsigu wuu dhacay. Hubi in server-ku socdo oo file-ku uu sax yahay.');
+            throw new Error('Timeout Request. please check the file is correctly.');
         }
         // Wuxuu soo celinayaa fayl (blob)
         return response.blob(); 
@@ -137,11 +137,11 @@ document.getElementById('excel-form').addEventListener('submit', function(event)
         a.click();
         a.remove();
         
-        excelMessage.innerHTML = `<p style="color:green; font-weight:bold;">Result was finished successfully! now you can download fail students Thanks!.</p>`;
+        excelMessage.innerHTML = `<p style="color:green; font-weight:bold;">Result was finished successfully! Now you can download fail students Thanks!.</p>`;
     })
     .catch(error => {
         console.error('Batch Error:', error);
-        excelMessage.innerHTML = `<p style="color:red; font-weight:bold;">Qalad ka dhacay xisaabinta: ${error.message}</p>`;
+        excelMessage.innerHTML = `<p style="color:red; font-weight:bold;">Error the calculation: ${error.message}</p>`;
     })
     .finally(() => {
         excelButton.disabled = false;
