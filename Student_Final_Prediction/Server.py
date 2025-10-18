@@ -9,8 +9,8 @@ from io import BytesIO
 from Utilities import prepare_features_from_raw
 
 # Initialize server
-Server = Flask(__name__)
-CORS(Server)
+App = Flask(__name__)
+CORS(App)
 
 # models
 MODELS = {
@@ -20,7 +20,7 @@ MODELS = {
   "xgb": joblib.load("models/xgb_model.joblib")
 }
 
-@Server.route("/", methods=["GET"])
+@App.route("/", methods=["GET"])
 def home():
   return jsonify({
     "message": "Welcome to Student Performance Final Prediction API",
@@ -39,7 +39,7 @@ def home():
     }
   })
 
-@Server.route("/predict", methods=["POST"])
+@App.route("/predict", methods=["POST"])
 def predict():
     
     # 1) choose model
@@ -86,7 +86,7 @@ def predict():
       
         })
 
-@Server.route("/upload_predict", methods=["POST"])
+@App.route("/upload_predict", methods=["POST"])
 def upload_predict():
     # 1) Hubi in fayl la soo galiyay
     if 'file' not in request.files:
@@ -150,4 +150,4 @@ def upload_predict():
         return jsonify({"error": f"Waxaa dhacay khalad intii lagu jiray hawlgalka: {e}"}), 500
 
 if __name__ == "__main__":
-    Server.run(host="0.0.0.0", port=8000, debug=True)  
+    App.run(host="0.0.0.0", port=8000, debug=True)  
