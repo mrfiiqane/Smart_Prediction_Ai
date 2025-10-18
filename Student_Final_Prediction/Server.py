@@ -61,13 +61,6 @@ def predict():
        x_new, Total = prepare_features_from_raw(Data) 
        pred_label = float(model.predict(x_new)[0])           #so celiyaa Pass ama Fail
        prediction = "Pass" if pred_label == 1 else "Fail"
-    
-
-       
-      #  if Total >= 50:
-      #     prediction = "Pass"
-      #  else:
-      #     prediction = "Fail"
 
     except Exception as e:
         return jsonify({"error": f" failed to predict: {e}"}), 500
@@ -79,8 +72,6 @@ def predict():
                 else "XGBoost"
               ),
             "input":{
-                
-                
                 # "Age": int(Data["Age"]),
                 # "Gender": Data["Gender"], 
                 "Attendance": float(Data["Attendance"]),
@@ -126,32 +117,28 @@ def upload_predict():
         Missing = [k for k in Required if k not in df_original.columns]
         if Missing:
             return jsonify({"error": f"Faylka wuxuu ka maqan yahay tiirarka (columns): {Missing}"}), 400
-
-        # 4) Diyaarinta xogta iyo Saadaalinta
-        # Halkan waxaan u baahanahay in 'prepare_features_from_raw' uu u shaqeeyo DataFrames
-        X_new, Total_Scores = prepare_features_from_raw(df_original.copy()) # Isticmaal copy si aad u ilaaliso asalka
-        
-        # Saadaali
+      
+        X_new, Total_Scores = prepare_features_from_raw(df_original.copy()) 
         pred_labels = model.predict(X_new)
         
         # Ku dar natiijooyinka DataFrame-ka
-        df_original['Total_Score_Calculated'] = Total_Scores
+        df_original['Total_Score'] = Total_Scores
         df_original['Label'] = pred_labels
         df_original['Result_predict'] = df_original['Label'].apply(
             lambda x: "Pass" if x == 1 else "Fail"
         )
-        
-        # 5) Soo saar ardayda "Fail" ku noqotay
+     
         df_failed = df_original[df_original['Result_predict'] == 'Fail'].copy()
+        df_failed = df_failed.drop(columns=['Label'], errors='ignore')
         
-        # 6) Diyaarinta Faylka Soo Dejinta (Download)
+
+       
         output = BytesIO()
         writer = pd.ExcelWriter(output, engine='xlsxwriter')
         df_failed.to_excel(writer, sheet_name='Student_Fail', index=False)
         writer.close()
         output.seek(0) # dib ugu noqo bilawga buffer-ka
-        
-        # 7) Soo dir Faylka
+
         return send_file(
             output,
             mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -160,7 +147,6 @@ def upload_predict():
         )
 
     except Exception as e:
-        # Ku celin khalad kasta oo dhaca
         return jsonify({"error": f"Waxaa dhacay khalad intii lagu jiray hawlgalka: {e}"}), 500
 
 if __name__ == "__main__":
