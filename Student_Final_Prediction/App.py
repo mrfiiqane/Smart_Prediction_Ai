@@ -150,4 +150,4 @@ def upload_predict():
         return jsonify({"error": f"Waxaa dhacay khalad intii lagu jiray hawlgalka: {e}"}), 500
 
 if __name__ == "__main__":
-    App.run(host="0.0.0.0", port=8000, debug=True)  
+    App.run()  
