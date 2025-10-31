@@ -22,6 +22,7 @@ waxan ka saaray khaladaadka, meelaha banan oo aan buuxiyey, duplicate, iqr_funct
 
 ![alt text](./Student_Final_Prediction/images/file_check.png)
 
+
 ###### before
 
 ![alt text](./Student_Final_Prediction/images/before.png)
